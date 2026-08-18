@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 
+import { generateToken } from "../utils/generateToken.js";
 
 import User from "../models/user.model.js";
 
@@ -39,9 +40,12 @@ export const registerUserController = async (req, res) => {
       password: hashedPassword
     })
 
+    const token = generateToken(user);
+
     return res.status(201).json({
       message: "User registered successfully",
       data: {
+        token,
         user: {
           id: user._id,
           username: user.username,
@@ -87,10 +91,12 @@ export const loginUserController = async (req, res) => {
       user.password
     );
 
+    const token = generateToken(user);
 
     return res.status(200).json({
       message: "Login successful",
       data: {
+        token,
         user: {
           id: user._id,
           username: user.username,

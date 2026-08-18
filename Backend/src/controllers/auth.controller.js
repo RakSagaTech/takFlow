@@ -91,6 +91,11 @@ export const loginUserController = async (req, res) => {
       user.password
     );
 
+    if (!isPasswordValid){
+      return res.status(401).json({
+        message: "Invalid credentials"
+      })
+    }
     const token = generateToken(user);
 
     return res.status(200).json({

@@ -6,7 +6,7 @@ const username = Joi.string()
   .min(4)
   .max(20)
   .required()
-  .message({
+  .messages({
     "string.empty": "Username is required",
     "string.min": "Username must be at least 4 characters",
     "string.max": "Username cannot exceed 20 characters",
